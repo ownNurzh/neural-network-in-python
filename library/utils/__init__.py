@@ -1,3 +1,3 @@
-from activation_functions import ActivationFunctions
+from .activation_functions import ActivationFunctions
 
 __all__ = ["ActivationFunctions"]

@@ -1,16 +1,19 @@
+#start
 #import python modules
 from abc import ABC, abstractmethod
 #import package modules
 import numpy as np
 #import local modules
 #pass
-
+#end
 class ActivationFunction(ABC):
+    @staticmethod
     @abstractmethod
-    def activate(self, x):
+    def activate(x):
         pass
+    @staticmethod
     @abstractmethod
-    def derivative(self,x):
+    def derivative(x):
         pass
 
 class Relu(ActivationFunction):
