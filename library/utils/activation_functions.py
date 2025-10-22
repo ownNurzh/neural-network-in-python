@@ -1,7 +1,7 @@
 #import python modules
 import math
 #import package modules
-#pass
+import numpy as np
 #import local modules
 #pass
 class ActivationFunctions:

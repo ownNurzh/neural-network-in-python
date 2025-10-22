@@ -9,6 +9,8 @@ license = {text = "MIT"}
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
+    "numpy (>=2.3.4,<3.0.0)",
+    "pytest (>=8.4.2,<9.0.0)"
 ]
 
 
