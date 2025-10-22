@@ -33,7 +33,6 @@ class Sigmoid(ActivationFunction):
         s = Sigmoid.activate(x)
         return s * (1 - s)
 
-
 class ActivationFunctions:
-    RELU = Relu
-    SIGMOID = Sigmoid
+    RELU:type[ActivationFunction] = Relu
+    SIGMOID:type[ActivationFunction] = Sigmoid
