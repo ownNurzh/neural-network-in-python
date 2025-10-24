@@ -3,3 +3,8 @@
 #cache
 __pycache__/
 .pytest_cache/
+#to do files
+*.todo
+*.todos
+*.taskpaper
+todo.*
