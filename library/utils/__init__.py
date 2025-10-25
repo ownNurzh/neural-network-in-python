@@ -1,3 +1,2 @@
-from .activation_functions import ActivationFunctions
-
-__all__ = ["ActivationFunctions"]
+from .activation_functions import ActivationFunctions,TYPE
+__all__ = ["ActivationFunctions","TYPE"]

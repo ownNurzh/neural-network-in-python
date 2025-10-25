@@ -39,3 +39,6 @@ class Sigmoid(ActivationFunction):
 class ActivationFunctions:
     RELU:type[ActivationFunction] = Relu
     SIGMOID:type[ActivationFunction] = Sigmoid
+    
+class TYPE:
+    ACTIVATION_FUNCTION = type[ActivationFunctions]
