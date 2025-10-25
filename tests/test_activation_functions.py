@@ -20,6 +20,7 @@ def orig_sigmoid(x: np.ndarray) -> np.ndarray:
 def test_relu_activation(args,expected):
     result = ActivationFunctions.RELU.activate(args)
     np.testing.assert_array_equal(result, expected)
+
 @pytest.mark.parametrize("args", [
     np.array([-2, 0, 2]),
     np.array([-5, 5]),
