@@ -1,3 +1,4 @@
 from .layer import Layer
 from .weight import Weight
-__all__ = ["Weight","Layer"]
+from .fnn import FNN
+__all__ = ["Weight","Layer","FNN"]
