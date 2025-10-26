@@ -7,7 +7,6 @@ import numpy as np
 from library.nn import Layer
 #end
 class Weight:
-    _weights: np.ndarray
     def __init__(self,layers:list[Layer]) -> None:
         self.initialize_weights(layers)
     def initialize_weights(self,layers:list[Layer]) -> None:

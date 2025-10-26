@@ -22,3 +22,18 @@ def test_fnn_initialization():
     assert fnn._layers == structure
     assert len(fnn._weight._weights) == len(new_weight._weights)
     
+
+def test_fnn_forward():
+    structure = [
+        Layer(3, ActivationFunctions.RELU),
+        Layer(3, ActivationFunctions.RELU),
+        Layer(2, ActivationFunctions.SIGMOID)
+    ]
+    fnn = FNN(layers=structure)
+    input_data = np.array([1.0, 0.5, -1.5])
+    fnn.forward(inp=input_data)
+    assert np.array_equal(fnn._layers[0]._values, input_data)
+    for i in range(1, len(fnn._layers)):
+        c = fnn._layers[i]._activation_cache
+        assert len(c) == fnn._layers[i]._units
+        print(c)
