@@ -19,5 +19,5 @@ def test_weight_initialization():
     weight = Weight(layers=structure)
     assert len(weight._weights) == len(structure) - 1
     for i in range(len(structure) - 1):
-        assert weight._weights[i].shape == (structure[i]._units, structure[i + 1]._units)
+        assert weight._weights[i].shape == (structure[i+1]._units, structure[i]._units)
     print(weight._weights)
