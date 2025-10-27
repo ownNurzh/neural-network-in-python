@@ -1,6 +1,7 @@
 #start
 #import python modules
 import json
+import random
 #import package modules
 import numpy as np
 #import local modules
@@ -14,6 +15,7 @@ from library.utils import z_score_normalization
 print("Importing data set...")
 with open("iris_dataset.json", "r", encoding="utf-8") as f: 
     data = json.load(f)
+    random.shuffle(data)
     print(f"File data len: {len(data)}")
     print(f"First index data: {data[0]}")
 
@@ -34,10 +36,39 @@ for d in datas_for_normalization:
     print(f"Updated values {d},finish test type - {type(a)}, value - {a} ")
 
 
+#Split data for testing and training
+print("Preparing data for training")
+answer = ["setosa","versicolor","virginica"]
+all_datas = {}
+training_datas = []
+testing_datas = []
+for el in data:
+    spec = el["species"]
+    if not spec in all_datas:
+        all_datas[spec] = []
+    ns = [el[param] for param in el if param != "species"]
+    all_datas[spec].append(ns)
+
+train_data_len = 30
+for species in answer:
+    arr = all_datas[species]
+    for i in range(len(arr)):
+        structure_data = {
+            "input":arr[i],
+            "output":[1 if c == species else 0 for c in answer]
+        }
+        if i < train_data_len:
+            training_datas.append(structure_data)
+        else:
+            testing_datas.append(structure_data)
+ 
+print(f"Len training datas : {len(training_datas)}")
+print(f"Len testing datas : {len(testing_datas)}")
 #Create nn
 structure = [
     Layer(4, ActivationFunctions.RELU),
     Layer(12, ActivationFunctions.RELU),
     Layer(3, ActivationFunctions.SOFTMAX)
 ]
-yuutsu = None
+yuutsu = FNN(layers=structure)
+
