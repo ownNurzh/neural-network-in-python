@@ -36,9 +36,21 @@ class Sigmoid(ActivationFunction):
         s = Sigmoid.activate(x)
         return s * (1 - s)
 
+class SoftMax(ActivationFunction):
+    """Soft Max"""
+    @staticmethod
+    def activate(x : np.ndarray) -> np.ndarray:
+        exp_x = np.exp(x - np.max(x))
+        return exp_x / np.sum(exp_x)
+    @staticmethod
+    def derivative(x : np.ndarray) -> np.ndarray:
+        s = SoftMax.activate(x).reshape(-1, 1)
+        return np.diagflat(s) - np.dot(s, s.T)
+
 class ActivationFunctions:
     RELU:type[ActivationFunction] = Relu
     SIGMOID:type[ActivationFunction] = Sigmoid
+    SOFTMAX:type[ActivationFunction] = SoftMax
     
 class TYPE:
     ACTIVATION_FUNCTION = type[ActivationFunctions]

@@ -23,5 +23,6 @@ def test_layer_activation():
     weights = np.array([[0.2, 0.8, -0.5],[1.0, -1.5, 2.0]])
     values = np.array([1.0, -2.0, 3.0])
     layer.activate(prev_values=values,weights=weights)
-    assert len(layer._activation_cache) == len(weights)
-    print(layer._activation_cache)
+    print(layer._activation_cache,layer._values)
+    assert len(layer._activation_cache["before_activation"]) == units
+    

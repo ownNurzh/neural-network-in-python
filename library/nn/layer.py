@@ -27,10 +27,10 @@ class Layer:
             be_s.append(z)
         be_s = np.array(be_s)
         self._values = self._activation_func.activate(be_s)
-        self._activation_cache.append({
+        self._activation_cache = {
             "before_activation": be_s,
             "after_activation": self._values
-        })
+        }
         # print("PREV VALUES - ",prev_values,"VALUES - ",self._values)
         # print("CACHE - ",self._activation_cache)
 
