@@ -15,7 +15,7 @@ def orig_sigmoid(x: np.ndarray) -> np.ndarray:
 @pytest.mark.parametrize("args, expected", [
     (np.array([-1, 0, 1]), np.array([0, 0, 1])),
     (np.array([-5, -2, -0.1]), np.array([0, 0, 0])),
-    (np.array([2, 5, 10]), np.array([2, 5, 10])),
+    (np.array([2, 5, 10]), np.array([1, 1, 1])),
 ])
 def test_relu_activation(args,expected):
     result = ActivationFunctions.RELU.activate(args)
@@ -34,9 +34,9 @@ def test_sigmoid_activation(args):
     np.testing.assert_allclose(result, expected, rtol=1e-5)
 
 @pytest.mark.parametrize("args, expected", [
-    (np.array([0, -1, 2]), np.array([0, 0, 1])),
+    (np.array([0, -1, 2]), np.array([0, 0, 0])),
     (np.array([-5, -2, 0.1]), np.array([0, 0, 1])),
-    (np.array([2, 5, 10]), np.array([1, 1, 1])),
+    (np.array([2, 5, 10]), np.array([0, 0, 0])),
 ])
 def test_relu_derivative(args,expected):
     result = ActivationFunctions.RELU.derivative(args)

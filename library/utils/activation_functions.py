@@ -20,10 +20,10 @@ class Relu(ActivationFunction):
     """Rectified Linear Unit"""
     @staticmethod
     def activate(x : np.ndarray) -> np.ndarray:
-        return np.maximum(0, x)
+        return np.minimum(np.maximum(0, x),1)
     @staticmethod
     def derivative(x : np.ndarray) -> np.ndarray:
-        return np.where(x > 0, 1, 0)
+        return np.where(((x > 0)& (x < 1)), 1, 0)
 
 class Sigmoid(ActivationFunction):
     """Sigmoid"""
