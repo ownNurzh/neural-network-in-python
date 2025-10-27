@@ -15,4 +15,5 @@ with open("iris_dataset.json", "r", encoding="utf-8") as f:
     
     data = json.load(f)
     data = np.array(data)
-    print(f"file data shape: {data.shape}")
+    print(f"File data shape: {data.shape}")
+    print(f"First index data: {data[0]}")
