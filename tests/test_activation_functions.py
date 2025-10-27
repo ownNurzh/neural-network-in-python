@@ -51,6 +51,15 @@ def test_softmax_activation(args):
     expected = orig_softmax(args)
     result = ActivationFunctions.SOFTMAX.activate(args)
     np.testing.assert_allclose(result, expected, rtol=1e-5)
+    
+@pytest.mark.parametrize("args, expected", [
+    (np.array([-1, 0, 1]), np.array([-1 * ActivationFunctions.LEAKYRELU.alpha, 0, 1])),
+    (np.array([-5, -2, -0.1]), np.array([-5 * ActivationFunctions.LEAKYRELU.alpha, -2 * ActivationFunctions.LEAKYRELU.alpha, -0.1 * ActivationFunctions.LEAKYRELU.alpha])),
+    (np.array([2, 5, 10]), np.array([1, 1, 1])),
+])
+def test_leaky_relu_activation(args,expected):
+    result = ActivationFunctions.LEAKYRELU.activate(args)
+    np.testing.assert_array_equal(result, expected)
 
 @pytest.mark.parametrize("args, expected", [
     (np.array([0, -1, 2]), np.array([0, 0, 0])),
@@ -83,3 +92,13 @@ def test_softmax_derivative(args):
     expected = orig_softmax_derivative(args)
     result = ActivationFunctions.SOFTMAX.derivative(args)
     np.testing.assert_allclose(result, expected)
+    
+    
+@pytest.mark.parametrize("args, expected", [
+    (np.array([-1, 0, 1]), np.array([ActivationFunctions.LEAKYRELU.alpha, 0, 0])),
+    (np.array([-5, -2, -0.1]), np.array([ActivationFunctions.LEAKYRELU.alpha, ActivationFunctions.LEAKYRELU.alpha, ActivationFunctions.LEAKYRELU.alpha])),
+    (np.array([2, 5, 10]), np.array([0, 0, 0])),
+])
+def test_leaky_relu_derivative(args,expected):
+    result = ActivationFunctions.LEAKYRELU.derivative(args)
+    np.testing.assert_array_equal(result, expected)

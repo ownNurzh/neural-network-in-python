@@ -17,13 +17,13 @@ class ActivationFunction(ABC):
         pass
 
 class Relu(ActivationFunction):
-    """Rectified Linear Unit"""
+    """Rectified Linear Unit (clipped)"""
     @staticmethod
     def activate(x : np.ndarray) -> np.ndarray:
         return np.minimum(np.maximum(0, x),1)
     @staticmethod
     def derivative(x : np.ndarray) -> np.ndarray:
-        return np.where(((x > 0)& (x < 1)), 1, 0)
+        return np.where(((x > 0) & (x < 1)), 1, 0)
 
 class Sigmoid(ActivationFunction):
     """Sigmoid"""
@@ -46,11 +46,24 @@ class SoftMax(ActivationFunction):
     def derivative(x : np.ndarray) -> np.ndarray:
         s = SoftMax.activate(x).reshape(-1, 1)
         return np.diagflat(s) - np.dot(s, s.T)
+    
+class LeakyRelu(ActivationFunction):
+    alpha = 0.01
+
+    @staticmethod
+    def activate(x: np.ndarray) -> np.ndarray:
+        return np.minimum(np.where(x > 0, x, LeakyRelu.alpha * x),1)
+
+    @staticmethod
+    def derivative(x: np.ndarray) -> np.ndarray:
+        return np.where(x < 0, LeakyRelu.alpha, np.where((x > 0) & (x < 1), 1.0, 0.0))
+
 
 class ActivationFunctions:
     RELU:type[ActivationFunction] = Relu
     SIGMOID:type[ActivationFunction] = Sigmoid
     SOFTMAX:type[ActivationFunction] = SoftMax
+    LEAKYRELU:type[ActivationFunction] =LeakyRelu
     
 class TYPE:
     ACTIVATION_FUNCTION = type[ActivationFunctions]
