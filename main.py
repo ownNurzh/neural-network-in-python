@@ -64,11 +64,37 @@ for species in answer:
  
 print(f"Len training datas : {len(training_datas)}")
 print(f"Len testing datas : {len(testing_datas)}")
+random.shuffle(training_datas)
+random.shuffle(testing_datas)
 #Create nn
 structure = [
     Layer(4, ActivationFunctions.RELU),
-    Layer(12, ActivationFunctions.RELU),
+    Layer(12, ActivationFunctions.LEAKYRELU),
     Layer(3, ActivationFunctions.SOFTMAX)
 ]
 yuutsu = FNN(layers=structure)
 
+#Training yuutsu
+print("Start training...")
+
+for epoch in range(50):
+    for train in training_datas:
+        output = np.array(yuutsu.forward(train["input"]))
+        true_out = np.array(train["output"])
+        yuutsu.backprop(true_out,learning_rate=0.01)
+        answer = np.argmax(output)
+        #print("Epoch - ",epoch," True output - ",true_out,", Yuutsu output - ",output,", answer - ",answer)
+print("End training")
+#Testing yuutsu
+print("Start testing...")
+answers = []
+for test in testing_datas:
+    output = np.array(yuutsu.forward(test["input"]))
+    true_out = np.array(test["output"])
+    yuutsu.backprop(true_out,learning_rate=0.01)
+    answer = np.argmax(output)
+    answers.append(answer == np.argmax(true_out))
+answers = np.array(answers)
+result = np.sum(answers)
+print("End testing")
+print("Testing result : True answer - ",result,", False answer - ",answers.size - result," Accuracy - ", result / (len(testing_datas) / 100))

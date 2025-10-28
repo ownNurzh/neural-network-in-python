@@ -33,6 +33,17 @@ def test_fnn_forward():
     input_data = np.array([1.0, 0.5, -1.5])
     fnn.forward(inp=input_data)
     assert np.array_equal(fnn._layers[0]._values, input_data)
-    #print(fnn._weight._weights)
-    #for layer in structure:
-        #print(layer._units,layer._values,layer._activation_cache)
+        
+def test_fnn_backprop():
+    structure = [
+        Layer(3, ActivationFunctions.RELU),
+        Layer(8, ActivationFunctions.RELU),
+        Layer(2, ActivationFunctions.SOFTMAX)
+    ]
+    fnn = FNN(layers=structure)
+    input_data = np.array([1.0, 0.5, -1.5])
+    true_output = np.array([0,1])
+    output = fnn.forward(inp=input_data)
+    fnn.backprop(true_output,learning_rate=0.01)
+    np.testing.assert_allclose(fnn._layers[-1]._deltas, output - true_output)
+    
