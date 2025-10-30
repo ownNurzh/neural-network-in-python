@@ -17,3 +17,28 @@ In addition to the main model, I also wrote a small custom library — originall
 </ul>
 <h3>Goal</h3>
 This is an educational and experimental project — I use it to explore new ideas and better understand how neural networks work under the hood.
+
+<h3>Install and run</h3>
+<ul>
+  <li>
+    <strong>Git clone</strong>
+    <pre><code>git clone https://github.com/ownNurzh/neural-network-in-python.git</code></pre>
+  </li>
+  <li>
+    <strong>Poetry install</strong><br/>
+    Pip
+    <pre><code>pip install poetry</code></pre><br/>
+    Windows Powershell
+    <pre><code>(Invoke-WebRequest -Uri https://install.python-poetry.org -UseBasicParsing).Content | py -</code></pre><br/>
+    Linux
+    <pre><code>curl -sSL https://install.python-poetry.org | python3 -</code></pre>
+  </li>
+  <li>
+    <strong>Install dependencies</strong>
+    <pre><code>poetry install</code></pre>
+  </li>
+  <li>
+    <strong>Run</strong>
+    <pre><code>poetry run main.py</code></pre>
+  </li>
+</ul>
