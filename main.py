@@ -91,7 +91,6 @@ answers = []
 for test in testing_datas:
     output = np.array(yuutsu.forward(test["input"]))
     true_out = np.array(test["output"])
-    yuutsu.backprop(true_out,learning_rate=0.01)
     answer = np.argmax(output)
     answers.append(answer == np.argmax(true_out))
 answers = np.array(answers)
